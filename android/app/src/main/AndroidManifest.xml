@@ -6,9 +6,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="splash_screen_vid_test">
-        <activity
-            android:name=".SplashActivity"
-            android:exported="false" />
+
         <activity
             android:name=".SplashScreen"
             android:exported="true"
@@ -19,6 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
