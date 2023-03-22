@@ -1,6 +1,4 @@
 package com.example.splash_screen_vid_test
-
-
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,47 +12,37 @@ import androidx.appcompat.app.AppCompatActivity
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {
 
+    var simpleVideoView : VideoView? = null
     var mediaControls: MediaController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        setContentView(R.layout.activity_splash_screen)
+//        startActivity(Intent(this@SplashScreen, MainActivity::class.java))
+        setContentView(R.layout.activity_splash)
 
-        // This is used to hide the status bar and make
-        // the splash screen as a full screen activity.
+        // This is used to hide the status bar
         window.setFlags(
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
-        val simpleVideoView = findViewById<View>(R.id.SplashScreen) as VideoView
+        simpleVideoView = findViewById<VideoView>(R.id.simpleVideoView) as VideoView
 
-//        VideoView simpleVideoView = new VideoView(this);
-
-        setContentView(simpleVideoView)
+        simpleVideoView?.setVideoURI(Uri.parse("android.resource://"
+                + packageName + "/" + R.raw.butterfly209))
 
         if (mediaControls == null) {
-            // creating an object of media controller class
             mediaControls = MediaController(this)
-
-            // set the anchor view for the video view
             mediaControls!!.setAnchorView(this.simpleVideoView)
         }
 
-        // set the media controller for video view
-        simpleVideoView.setMediaController(mediaControls)
+        simpleVideoView?.setMediaController(mediaControls)
+        simpleVideoView?.requestFocus()
+        simpleVideoView?.start()
 
-        // set the absolute path of the video file which is going to be played
-        simpleVideoView.setVideoURI(Uri.parse("android.resource://"
-                + packageName + "/" + R.raw.buttefly209))
 
-        simpleVideoView.requestFocus()
-
-        // starting the video
-        simpleVideoView.start()
-
-        simpleVideoView.setOnCompletionListener {
+        simpleVideoView?.setOnCompletionListener {
             Toast.makeText(applicationContext, "Video completed",
                 Toast.LENGTH_LONG).show()
             true
@@ -62,10 +50,10 @@ class SplashScreen : AppCompatActivity() {
 
         // we used the postDelayed(Runnable, time) method
         // to send a message with a delayed time.
-        Handler().postDelayed({
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }, 1000) // 3000 is the delayed time in milliseconds.
+//        Handler().postDelayed({
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }, 1000) // 3000 is the delayed time in milliseconds.
     }
 }
